@@ -397,7 +397,11 @@ namespace SteveCadwallader.CodeMaid.Model.Comments
 
                     // Parse function returns true if it had to wrap lines. If so, we need to force a
                     // newline before the closing tag.
-                    needBreakBefore = Parse(l, indentLevel, xmlTagLength);
+                    if (String.Equals(line.TagName, "summary", StringComparison.OrdinalIgnoreCase)
+                        && indentLevel > 0)
+                        needBreakBefore = Parse(l, indentLevel - 1, xmlTagLength);
+                    else
+                        needBreakBefore = Parse(l, indentLevel, xmlTagLength);
                     tagOnOwnLine |= needBreakBefore;
                 }
             }
