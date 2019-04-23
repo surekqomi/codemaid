@@ -43,7 +43,8 @@ namespace SteveCadwallader.CodeMaid.Model.Comments.Options
                 Default = XmlTagOptions.FromSettings(settings),
                 Tags = new Dictionary<string, FormatterOptionsXmlTag>
                 {
-                    ["summary"] = new FormatterOptionsXmlTag { Split = settings.Formatting_CommentXmlSplitSummaryTagToMultipleLines ? XmlTagNewLine.Always : XmlTagNewLine.Default },
+                    // Force the <summary> tag to NOT be indented regardless of the indent setting.
+                    ["summary"] = new FormatterOptionsXmlTag { Split = settings.Formatting_CommentXmlSplitSummaryTagToMultipleLines ? XmlTagNewLine.Always : XmlTagNewLine.Default, Indent = 0 },
                     ["copyright"] = new FormatterOptionsXmlTag { Split = XmlTagNewLine.Always, Indent = CodeCommentHelper.CopyrightExtraIndent },
                     ["code"] = new FormatterOptionsXmlTag { Split = XmlTagNewLine.BeforeAndAfter, Literal = true },
                     ["p"] = FormatterOptionsXmlTagOverrideSplitBeforeAfter,
